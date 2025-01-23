@@ -1,0 +1,91 @@
+@prefix gm: <https://www.genn.nolalt.org/ontologies/games> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+#
+# SKOS SCHEME
+#
+
+gm:gamesThesaurus rdf:type skos:ConceptScheme;
+	dct:title "Simple games thesaurus";
+	dct:creator gm:gennaroNolano.
+
+gm:game rdf:type skos:Concept;
+	skos:prefLabel "games"@en;
+	skos:prefLabel "giochi"@it;
+	skos:narrower gm:boardgame;
+	skos:narrower gm:videogame.
+
+gm:boardgame rdf:type skos:Concept;
+	skos:broader gm:game;
+	skos:prefLabel "board game"@en;
+	skos:prefLabel "gioco da tavolo"@it;
+	skos:altLabel "gioco di societa'"@it;
+	skos:narrower gm:cooperativeboardgame;
+	skos:narrower gm:competitiveboardgame;
+	skos:narrower gm:legacyboardgame.
+
+gm:cooperativeboardgame rdf:type skos:Concept;
+	skos:broader gm:boardgame;
+	skos:prefLabel "cooperative board game"@en.
+
+gm:competitiveboardgame rdf:type skos:Concept;
+	skos:broader gm:boardgame;
+	skos:prefLabel "competitive board game"@en.
+
+gm:legacyboardgame rdf:type skos:Concept;
+	skos:broader gm:boardgame;
+	skos:prefLabel "legacy board game"@en.	
+
+gm:videogame rdf:type skos:Concept;
+	skos:broader gm:game;
+	skos:prefLabel "video game"@en;
+	skos:prefLabel "videogioco"@it;
+	skos:altLabel "videogame"@it.
+
+
+gm:mechanic rdf:type skos:Concept;
+	skos:prefLabel "mechanic"@en;
+	skos:prefLabel "meccanica"@it.
+
+gm:subDomain rdf:type skos:Concept;
+	skos:prefLabel "type"@en;
+	skos:prefLabel "tipo"@it.
+
+gm:category rdf:type skos:Concept;
+	skos:prefLabel "category"@en;
+	skos:prefLabel "categoria"@it.
+
+gm:family rdf:type skos:Concept;
+	skos:prefLabel "family"@en;
+	skos:prefLabel "famiglia"@it.
+
+gm:hasMechanic a rdf:Property;
+	rdfs:domain gm:game;
+	rdfs:range gm:mechanic .
+
+gm:hasSubDomain a rdf:Property;
+	rdfs:domain gm:game;
+	rdfs:range gm:subDomain .
+
+gm:hasCategory a rdf:Property;
+	rdfs:domain gm:game;
+	rdfs:range gm:category .
+
+gm:hasFamily a rdf:Property;
+	rdfs:domain gm:game;
+	rdfs:range gm:family .
+
+gm:reimplements a rdf:Property;
+	rdfs:domain gm:game;
+	rdfs:range gm:game .
+
+#
+# INSTANCES
+#
+

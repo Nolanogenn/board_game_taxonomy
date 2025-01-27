@@ -4,10 +4,11 @@ import requests
 import json
 
 def get_text(link):
+    i = link.split('/')[4]
     t = requests.get(link).text
     s = BeautifulSoup(t, "html.parser")
     descr = s.select('div p')[0].text
-    return descr
+    return descr,i
 
 baseUrl = "https://boardgamegeek.com"
 url = "https://boardgamegeek.com/browse/boardgamesubdomain"
@@ -22,4 +23,4 @@ mechanics = [
 
 with open('../data/subdomains', 'w+') as f:
     for m in mechanics:
-        f.write(f"{m[0]}\t{m[1].replace('\n', ' ')}\n")
+        f.write(f"{m[0]}\t{m[1][0].replace('\n', ' ')}\t{m[1][1]}\n")

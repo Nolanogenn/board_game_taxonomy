@@ -20,14 +20,28 @@ gm:gamesThesaurus rdf:type skos:ConceptScheme;
 gm:bggThing a skos:Concept;
 	skos:narrower gm:game;
 	skos:narrower gm:personOfInterest;
-	skos:narrower gm:honor.
+	skos:narrower gm:honor;
+	skos:narrower gm:publisher.
 
 gm:honor a skos:Concept;
 	skos:broader gm:bggThing.
 
+gm:publisher a skos:Concept;
+	rdfs:broader gm:bggThing.
+
 gm:personOfInterest a skos:Concept;
 	rdfs:subClassOf foaf:Person;
 	skos:broader gm:bggThing.
+
+gm:developer a skos:Concept;
+	skos:prefLabel "developer"@en;
+	skos:preflabel "sviluppatore"@it;
+	skos:broader gm:personOfInterest.
+
+gm:graphicDesigner a skos:Concept;
+	skos:prefLabel "graphic designer"@en;
+	skos:preflabel "designer grafico"@it;
+	skos:broader gm:personOfInterest.
 
 gm:designer a skos:Concept;
 	skos:prefLabel "designer"@en;
@@ -35,7 +49,7 @@ gm:designer a skos:Concept;
 	skos:broader gm:personOfInterest.
 
 gm:artist a skos:Concept;
-	skos:prefLabel "arits"@en;
+	skos:prefLabel "artist"@en;
 	skos:preflabel "artista"@it;
 	skos:broader gm:personOfInterest.
 
@@ -113,42 +127,39 @@ gm:reimplements a rdf:Property;
 	rdfs:domain gm:game;
 	rdfs:range gm:game .
 
-gm:poll a skos:Concept;
-	skos:prefLabel "poll"@en;
-	skos:prefLabel "voti"@it.
-
-gm:hasPoll a rdf:Property;
-	rdfs:domain gm:game;
-	rdfs:range gm:poll.
-
-gm:hasTotalVotes a rdf:Property;
-	rdfs:domain gm:poll;
-	rdfs:range xsd:integer .
-
-gm:pollBestPlayersMin a rdf:Property;
-	rdfs:domain gm:poll;
-	rdfs:range xsd:integer .
-gm:pollBestPlayersMax a rdf:Property;
-	rdfs:domain gm:poll;
-	rdfs:range xsd:integer .
-gm:pollRecommendedPlayersMin a rdf:Property;
-	rdfs:domain gm:poll;
-	rdfs:range xsd:integer .
-gm:pollRecommendedPlayersMax a rdf:Property;
-	rdfs:domain gm:poll;
-	rdfs:range xsd:integer .
-gm:pollPlayerAge a rdf:Property;
-	rdfs:domain gm:poll ;
-	rdfs:range xsd:string .
-gm:pollLanguageDependence a rdf:Property;
-	rdfs:domain gm:poll ;
-	rdfs:range xsd:string .
-gm:pollAverageWeight a rdf:Property;
-	rdfs:domain gm:poll ;
-	rdfs:range xsd:float .
-gm:pollAverageWeightVotes a rdf:Property;
-	rdfs:domain gm:poll ;
-	rdfs:range xsd:integer .
+#
+#gm:poll a skos:Concept;
+#	skos:prefLabel "poll"@en;
+#	skos:prefLabel "voti"@it.
+#
+#gm:hasPoll a rdf:Property;
+#	rdfs:domain gm:game;
+#	rdfs:range gm:poll.
+#gm:pollBestPlayersMin a rdf:Property;
+#	rdfs:domain gm:poll;
+#	rdfs:range xsd:integer .
+#gm:pollBestPlayersMax a rdf:Property;
+#	rdfs:domain gm:poll;
+#	rdfs:range xsd:integer .
+#gm:pollRecommendedPlayersMin a rdf:Property;
+#	rdfs:domain gm:poll;
+#	rdfs:range xsd:integer .
+#gm:pollRecommendedPlayersMax a rdf:Property;
+#	rdfs:domain gm:poll;
+#	rdfs:range xsd:integer .
+#gm:pollPlayerAge a rdf:Property;
+#	rdfs:domain gm:poll ;
+#	rdfs:range xsd:string .
+#gm:pollLanguageDependence a rdf:Property;
+#	rdfs:domain gm:poll ;
+#	rdfs:range xsd:string .
+#gm:pollAverageWeight a rdf:Property;
+#	rdfs:domain gm:poll ;
+#	rdfs:range xsd:float .
+#gm:pollAverageWeightVotes a rdf:Property;
+#	rdfs:domain gm:poll ;
+#	rdfs:range xsd:integer .
+#
 
 gm:bggHref a rdf:Property;
 	rdfs:domain gm:bggThing;
@@ -175,7 +186,21 @@ gm:shortDescription a rdf:Property;
 gm:hasDesigner a rdf:Property;
 	rdfs:domain gm:game;	
 	rdfs:range gm:personOfInterest.
-
+gm:hasDeveloper a rdf:Property;
+	rdfs:domain gm:game;	
+	rdfs:range gm:personOfInterest.
+gm:hasGraphicDesigner a rdf:Property;
+	rdfs:domain gm:game;	
+	rdfs:range gm:personOfInterest.
+gm:hasArtist a rdf:Property;
+	rdfs:domain gm:game;	
+	rdfs:range gm:personOfInterest.
+gm:hasPublisher a rdf:Property;
+	rdfs:domain gm:game;	
+	rdfs:range gm:publisher.
+gm:hasHonor a rdf:Property;
+	rdfs:domain gm:game;	
+	rdfs:range gm:honor.
 gm:bggId a rdf:Property;
 	rdfs:domain gm:bggThing;
 	rdfs:range xsd:integer.

@@ -52,7 +52,6 @@ for game in games:
     g.add((gm[g_id], SCHEMA.name, Literal(game['name'])))
     g.add((gm[g_id], SKOS.definition, Literal(game['description'])))
     for category in game['links']['boardgamecategory']:
-        print(category)
         g.add((gm[g_id], gm['hasCategory'], gm[handleName(category['name'])]))
     for designer in game['links']["boardgamedesigner"]:
         if designer['objectid'] not in addedIds:

@@ -37,6 +37,19 @@ gm:developer a skos:Concept;
 	skos:prefLabel "developer"@en;
 	skos:preflabel "sviluppatore"@it;
 	skos:broader gm:personOfInterest.
+gm:insertDesigner a skos:Concept;
+	skos:prefLabel "developer"@en;
+	skos:preflabel "sviluppatore"@it;
+	skos:broader gm:personOfInterest.
+gm:editor a skos:Concept;
+	skos:prefLabel "editor"@en;
+	skos:broader gm:personOfInterest.
+gm:writer a skos:Concept;
+	skos:prefLabel "writer"@en;
+	skos:broader gm:personOfInterest.
+gm:scupltor a skos:Concept;
+	skos:prefLabel "sculptor"@en;
+	skos:broader gm:personOfInterest.
 
 gm:graphicDesigner a skos:Concept;
 	skos:prefLabel "graphic designer"@en;
@@ -186,6 +199,12 @@ gm:shortDescription a rdf:Property;
 gm:hasDesigner a rdf:Property;
 	rdfs:domain gm:game;	
 	rdfs:range gm:personOfInterest.
+gm:hasSculptor a rdf:Property;
+	rdfs:domain gm:game;	
+	rdfs:range gm:personOfInterest.
+gm:hasEditor a rdf:Property;
+	rdfs:domain gm:game;	
+	rdfs:range gm:personOfInterest.
 gm:hasDeveloper a rdf:Property;
 	rdfs:domain gm:game;	
 	rdfs:range gm:personOfInterest.
@@ -196,6 +215,12 @@ gm:hasArtist a rdf:Property;
 	rdfs:domain gm:game;	
 	rdfs:range gm:personOfInterest.
 gm:hasPublisher a rdf:Property;
+	rdfs:domain gm:game;	
+	rdfs:range gm:publisher.
+gm:hasWriter a rdf:Property;
+	rdfs:domain gm:game;	
+	rdfs:range gm:publisher.
+gm:hasInsertDesigner a rdf:Property;
 	rdfs:domain gm:game;	
 	rdfs:range gm:publisher.
 gm:hasHonor a rdf:Property;

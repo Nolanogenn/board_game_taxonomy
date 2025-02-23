@@ -10,6 +10,7 @@ types = open('data/subdomains').readlines()
 categories = open('data/subdomains').readlines()
 families = open('data/families').readlines()
 
+thing_info = json.load(open('data/thing_info.json'))
 id_to_thing = {}
 def handleName(name):
     n = name.strip().replace("'s",'s').replace(', ', '-').replace(': ','-').replace(' ', '-').replace('/','')
@@ -19,6 +20,22 @@ def handleLine(line):
     n = handleName(name)
     id_to_thing[i.strip()] = n
     return n, descr, i.strip()
+
+def addThing(g_id,category,thing,addedIds):
+    _id = thing['objectid']
+    _name = thing['name']
+    _href = thing['href']
+    _kind = thing_info[category]['kind']
+    _rel = thing_info[category]['rel']
+    _type = thing_info[category]['type']
+    if _id not in addedIds:
+        g.add((gm[_id], RDF.type, gm[_kind]))
+        if _type == 'person':
+            g.add((gm[_id], FOAF.name, Literal(_name)))
+        else:
+            g.add((gm[_id], SCHEMA.name, Literal(_name)))
+        addedIds.add(_id)
+    g.add((gm[g_id], gm[_rel], gm[_id]))
 
 addedIds = set()
 gm = Namespace("https://www.genn.nolalt.org/ontologies/games#")
@@ -52,58 +69,13 @@ for game in games:
     g.add((gm[g_id], SCHEMA.name, Literal(game['name'])))
     g.add((gm[g_id], SKOS.definition, Literal(game['description'])))
     for category in game['links']['boardgamecategory']:
-        g.add((gm[g_id], gm['hasCategory'], gm[handleName(category['name'])]))
-    for designer in game['links']["boardgamedesigner"]:
-        if designer['objectid'] not in addedIds:
-            d_id = designer['objectid']
-            d_name = designer['name']
-            d_href = designer['href']
-            g.add((gm[d_id], RDF.type, gm['designer']))
-            g.add((gm[d_id], FOAF.name, Literal(d_name)))
-            addedIds.add(d_id)
-        g.add((gm[g_id], gm['hasDesigner'], gm[designer['objectid']]))
-    for artist in game['links']["boardgameartist"]:
-        if artist['objectid'] not in addedIds:
-            d_id = artist['objectid']
-            d_name = artist['name']
-            d_href = artist['href']
-            g.add((gm[d_id], RDF.type, gm['artist']))
-            g.add((gm[d_id], FOAF.name, Literal(d_name)))
-            addedIds.add(d_id)
-        g.add((gm[g_id], gm['hasArtist'], gm[artist['objectid']]))
-    for publisher in game['links']["boardgamepublisher"]:
-        if publisher['objectid'] not in addedIds:
-            d_id = publisher['objectid']
-            d_name = publisher['name']
-            d_href = publisher['href']
-            g.add((gm[d_id], RDF.type, gm['publisher']))
-            g.add((gm[d_id], SCHEMA.name, Literal(d_name)))
-            addedIds.add(d_id)
-        g.add((gm[g_id], gm['hasPublisher'], gm[publisher['objectid']]))
-    for developer in game['links']["boardgamedeveloper"]:
-        if developer['objectid'] not in addedIds:
-            d_id = developer['objectid']
-            d_name = developer['name']
-            d_href = developer['href']
-            g.add((gm[d_id], RDF.type, gm['developer']))
-            g.add((gm[d_id], FOAF.name, Literal(d_name)))
-            addedIds.add(d_id)
-        g.add((gm[g_id], gm['hasDeveloper'], gm[developer['objectid']]))
-    for graphicDesigner in game['links']["boardgamegraphicdesigner"]:
-        if graphicDesigner['objectid'] not in addedIds:
-            d_id = graphicDesigner['objectid']
-            d_name = graphicDesigner['name']
-            d_href = graphicDesigner['href']
-            g.add((gm[d_id], RDF.type, gm['graphicDesigner']))
-            g.add((gm[d_id], FOAF.name, Literal(d_name)))
-            addedIds.add(d_id)
-        g.add((gm[g_id], gm['hasGraphicDesigner'], gm[graphicDesigner['objectid']]))
-    for honor in game['links']["boardgamehonor"]:
-        if honor['objectid'] not in addedIds:
-            d_id = honor['objectid']
-            d_name = honor['name']
-            d_href = honor['href']
-            g.add((gm[d_id], RDF.type, gm['honor']))
-            g.add((gm[d_id], SCHEMA.name, Literal(d_name)))
-            addedIds.add(d_id)
-        g.add((gm[g_id], gm['hasHonor'], gm[honor['objectid']]))
+        cat_name = handleName(category['name'])
+        g.add((gm[g_id], gm['hasCategory'], gm[cat_name]))
+    for mechanic in game['links']['boardgamemechanic']:
+        mec_name = handleName(mechanic['name'])
+        print(mec_name, g_id)
+        g.add((gm[g_id], gm['hasMechanic'], gm[mec_name]))
+    for thing in thing_info:
+        things = game['links'][thing]
+        for _thing in things:
+            addThing(g_id, thing, _thing,addedIds)

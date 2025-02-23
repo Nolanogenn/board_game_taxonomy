@@ -1,0 +1,65 @@
+{
+		"boardgamedesigner" : {
+			"kind" : "designer",
+			"rel" : "hasDesigner",
+			"type" : "person"
+	},
+		"boardgameartist" : {
+			"kind" : "artist",
+			"rel" : "hasArtist",
+			"type" : "person"
+	},
+		"boardgamedeveloper" : {
+			"kind" : "developer",
+			"rel" : "hasDeveloper",
+			"type" : "person"
+
+		}
+	,
+		"boardgamegraphicdesigner" : {
+			"kind" : "graphicDesigner",
+			"rel" : "hasGraphicDesigner",
+			"type" : "person"
+
+		}
+
+	,
+		"boardgamesculptor" : {
+			"kind" : "sculptor",
+			"rel" : "hasSculptor",
+			"type" : "person"
+
+		}
+
+	,
+		"boardgameeditor" : {
+			"kind" : "editor",
+			"rel" : "hasEditor",
+			"type" : "person"
+
+		}
+	,
+		"boardgamewriter" : {
+			"kind" : "writer",
+			"rel" : "hasWriter",
+			"type" : "person"
+		}
+	,
+		"boardgameinsertdesigner" : {
+			"kind" : "insertDesigner",
+			"rel" : "hasInsertDesigner",
+			"type" : "person"
+		}
+	,
+		"boardgamepublisher" : {
+			"kind" : "publisher",
+			"rel" : "hasPublisher",
+			"type" : "thing"
+		}
+	,
+		"boardgamehonor" : {
+			"kind" : "honor",
+			"rel" : "hasHonor",
+			"type" : "thing"
+		}
+}
